@@ -2,7 +2,7 @@
 
 # lib/ra_client/game.rb
 
-module RetroCheevos
+module RA
   #
   # Handles API requests related to games.
   class Game < Base

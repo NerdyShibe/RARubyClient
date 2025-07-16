@@ -2,7 +2,7 @@
 
 require 'forwardable'
 
-module RetroCheevos
+module RA
   # Base resource
   class Base
     extend Forwardable

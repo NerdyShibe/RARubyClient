@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
-module RetroCheevos
+module RA
   # The main client class for making requests to the RetroAchievements API.
   class Client
-    attr_reader :user_name, :api_key
+    BASE_URL = 'https://retroachievements.org/API/'
+
+    attr_reader :username, :api_key
 
     # Initializes a new Client.
     #
-    # @param user_name [String] Your RetroAchievements username.
+    # @param username [String] Your RetroAchievements username.
     # @param api_key [String] Your RetroAchievements API key.
-    def initialize(user_name:, api_key:)
-      @user_name = user_name
+    def initialize(username:, api_key:)
+      @username = username
       @api_key = api_key
     end
 
@@ -40,7 +42,8 @@ module RetroCheevos
 
       response = Net::HTTP.get_response(uri)
 
-      raise ApiError, "API request failed: #{response.code} #{response.message}" unless response.is_a?(Net::HTTPSuccess)
+      message = "API request failed: #{response.code} #{response.message}"
+      raise ApiError, message unless response.is_a?(Net::HTTPSuccess)
 
       JSON.parse(response.body)
     end
